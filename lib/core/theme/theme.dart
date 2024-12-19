@@ -344,6 +344,22 @@ class MaterialTheme {
        bodyColor: colorScheme.onSurface,
        displayColor: colorScheme.onSurface,
      ),
+     filledButtonTheme: FilledButtonThemeData(
+       style: ButtonStyle(
+         shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+           borderRadius: BorderRadius.circular(8.0)
+         )),
+         minimumSize: WidgetStatePropertyAll(Size(80,55))
+       )
+     ),
+     dropdownMenuTheme: DropdownMenuThemeData(
+       inputDecorationTheme: InputDecorationTheme(
+         border: OutlineInputBorder(
+           borderRadius: BorderRadius.circular(8.0)
+         )
+       )
+     ),
+     
      inputDecorationTheme: InputDecorationTheme(
        border: OutlineInputBorder(
          borderRadius: BorderRadius.circular(8.0)

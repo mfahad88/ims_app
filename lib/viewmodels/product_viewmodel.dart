@@ -10,17 +10,12 @@ class ProductViewModel extends ChangeNotifier{
   List<Product>? products=[];
   List<Category>? categories=[];
   List<Supplier>? supplier=[];
-  List<DataColumn> columns=[
-    DataColumn(label: Text('Id')),
-    DataColumn(label: Text('Category Name')),
-    DataColumn(label: Text('Supplier Name')),
-    DataColumn(label: Text('Product Name')),
-    DataColumn(label: Text('Reorder Level')),
-    DataColumn(label: Text('Stock Quantity')),
-    DataColumn(label: Text('Unit Price')),
-  ];
+  List<DataColumn> columns=[DataColumn(label: Text('Id'),), DataColumn(label: Text('Category Name')), DataColumn(label: Text('Supplier Name')), DataColumn(label: Text('Product Name')), DataColumn(label: Text('Reorder Level')), DataColumn(label: Text('Stock Quantity')), DataColumn(label: Text('Unit Price')),];
   Category? _selectedCategory;
   Supplier? _selectedSupplier;
+  TextEditingController productNameController=TextEditingController();
+  TextEditingController unitPriceController=TextEditingController();
+  TextEditingController quantityController=TextEditingController();
 
   Supplier? get selectedSupplier => _selectedSupplier;
 
@@ -35,8 +30,19 @@ class ProductViewModel extends ChangeNotifier{
     _selectedCategory = value;
     notifyListeners();
   }
-
   bool isLoading=false;
+
+  Future<void> addProduct() async {
+    var db=DatabaseManager();
+    MySqlConnection? conn=await db.createConnection();
+    if(products?.isNotEmpty??false){
+      if(products?.where((element) => element.productName.toLowerCase()==productNameController.text.toLowerCase(),).first!=null){
+        conn?.query('Update products SET unit_price = ${unitPriceController.text}, stock_quantity=select stock_quantity from products where lower(product_name)=lower(${productNameController.text.trim()})+${unitPriceController.text} where product_name=${productNameController.text}');
+      }else{
+
+      }
+    }
+  }
   Future<void> fetchProducts() async {
     var db=DatabaseManager();
     MySqlConnection? conn=await db.createConnection();
