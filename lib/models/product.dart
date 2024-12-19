@@ -23,4 +23,9 @@ class Product{
         this.category,
         this.supplier
       });
+
+  @override
+  String toString() {
+    return 'Product{productId: $productId, productName: $productName, categoryId: $categoryId, supplierId: $supplierId, unitPrice: $unitPrice, stockQuantity: $stockQuantity, reorderLevel: $reorderLevel, category: $category, supplier: $supplier}';
+  }
 }

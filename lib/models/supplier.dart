@@ -13,4 +13,9 @@ class Supplier{
       required this.phoneNumber,
       required this.email,
       this.address});
+
+  @override
+  String toString() {
+    return 'Supplier{supplierId: $supplierId, supplierName: $supplierName, contactPerson: $contactPerson, phoneNumber: $phoneNumber, email: $email, address: $address}';
+  }
 }
